@@ -1,5 +1,9 @@
 import { Server } from 'socket.io';
 
+interface SendNewMessageData {
+    message: string;
+}
+
 const socket = new Server({
     cors: {
         origin: '*'
@@ -8,6 +12,11 @@ const socket = new Server({
 
 socket.on('connection', (connectedSocket) => {
     console.log('Connected');
+
+
+    connectedSocket.on('sendNewMessage', (data: SendNewMessageData) => {
+        connectedSocket.emit('newChatMessage', data)
+    })
 
     connectedSocket.on('disconnect', () => {
         console.log('Disconnected');
