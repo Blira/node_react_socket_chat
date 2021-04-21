@@ -27,32 +27,29 @@ export function MessagesProvider({ children }: MessagesProviderProps) {
     const socketRef: NotUndefinedRef = useRef<Socket>() as NotUndefinedRef;
 
     useEffect(() => {
+        console.log('dale')
         socketRef.current = io(
             "http://localhost:3333"
         );
 
-        const currentSocket = socketRef.current;
-
-        currentSocket.on(
+        socketRef.current.on(
             "newChatMessage",
-            ({message}: NewChatMessageData) => {
-                console.log('Here! :D')
+            ({ message }: NewChatMessageData) => {
+                setMessages(messages => [...messages, message]);
                 const htmlElement = document.getElementById('message-field');
-                if(htmlElement){
+                if (htmlElement) {
                     (htmlElement as HTMLInputElement).value = '';
                 }
-                const newMessages = [...messages, message];
-                setMessages(newMessages);
             }
         );
 
         return () => {
-            currentSocket.disconnect();
+            socketRef.current.disconnect();
         };
     }, []);
 
     const handleNewMessage = (message: string) => {
-        socketRef.current.emit("sendNewMessage", message)
+        socketRef.current.emit("sendNewMessage", { message })
     };
 
     return (
