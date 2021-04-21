@@ -27,7 +27,6 @@ export function MessagesProvider({ children }: MessagesProviderProps) {
     const socketRef: NotUndefinedRef = useRef<Socket>() as NotUndefinedRef;
 
     useEffect(() => {
-        console.log('dale')
         socketRef.current = io(
             "http://localhost:3333"
         );
