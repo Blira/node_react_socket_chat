@@ -1,8 +1,8 @@
-import Chat from "./components/Chat";
+import { ChatPage } from "./pages/chat";
 
 function App() {
   return (
-    <Chat />
+    <ChatPage />
   );
 }
 
