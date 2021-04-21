@@ -1,8 +1,12 @@
+import MessageBox from "./components/MessageBox";
 import WriteBox from "./components/WriteBox";
 
 function App() {
   return (
-    <WriteBox />
+    <>
+      <MessageBox />
+      <WriteBox />
+    </>
   );
 }
 
