@@ -15,7 +15,7 @@ socket.on('connection', (connectedSocket) => {
 
 
     connectedSocket.on('sendNewMessage', (data: SendNewMessageData) => {
-        connectedSocket.emit('newChatMessage', data)
+        socket.emit('newChatMessage', data)
     })
 
     connectedSocket.on('disconnect', () => {
